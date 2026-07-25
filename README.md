@@ -14,6 +14,10 @@
 
 <img src="docs/screenshot.png" width="880" alt="PokeGrid rodando quatro contas ao mesmo tempo">
 
+<img src="docs/modo-simples.png" width="880" alt="Modo Simples: painel com os números das quatro contas">
+
+<sub>Modo Simples: esconde o jogo e mostra só os números. Cada seção pode ser movida e redimensionada.</sub>
+
 </div>
 
 > Esta é a versão que roda a partir do código. Não tem executável pronto pra baixar: você pega o código, olha o que ele faz e roda você mesmo. Assim a confiança fica com você, não comigo.

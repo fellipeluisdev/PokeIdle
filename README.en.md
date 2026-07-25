@@ -14,6 +14,10 @@
 
 <img src="docs/screenshot.png" width="880" alt="PokeGrid running four accounts at once">
 
+<img src="docs/modo-simples.png" width="880" alt="Simple mode: dashboard with the numbers of all four accounts">
+
+<sub>Simple mode: hides the game and shows only the numbers. Every section can be moved and resized.</sub>
+
 </div>
 
 > This is the run-from-source version. There is no ready-made executable to download: you grab the code, look at what it does and run it yourself. That way the trust is on you, not on me.
