@@ -3368,23 +3368,23 @@
                 position: fixed;
                 top: 60px;
                 right: 20px;
-                width: 340px;
-                max-height: calc(100vh - 20px);
+                width: 360px;
+                max-height: calc(100vh - 24px);
                 z-index: 2147483647;
                 overflow: hidden;
                 color: #e6edf3;
                 background:
                     linear-gradient(
-                        165deg,
-                        #161b22 0%,
-                        #0d1117 60%,
-                        #0d1117 100%
+                        180deg,
+                        #0d1218 0%,
+                        #0c141d 45%,
+                        #0a1118 100%
                     );
-                border: 1px solid #30363d;
-                border-radius: 14px;
+                border: 2px solid #2a3b52;
+                border-radius: 16px;
                 box-shadow:
-                    0 0 0 1px rgba(0,0,0,.6),
-                    0 14px 40px rgba(0,0,0,.7);
+                    0 0 0 1px rgba(255,255,255,.02),
+                    0 14px 40px rgba(0,0,0,.65);
                 font-family:
                     Arial,
                     Helvetica,
@@ -3459,12 +3459,17 @@
                 justify-content: space-between;
                 gap: 10px;
                 min-height: 48px;
-                padding: 9px 10px;
+                padding: 10px 12px;
                 cursor: grab;
                 user-select: none;
-                background: #0b0f15;
-                border-top: 2px solid #e3350d;
-                border-bottom: 1px solid #21262d;
+                background:
+                    linear-gradient(
+                        180deg,
+                        #121c28 0%,
+                        #0d1521 100%
+                    );
+                border-bottom: 1px solid #27364b;
+                box-shadow: inset 0 -1px 0 rgba(255,255,255,.05);
             }
 
             #${CONFIG.panelId}
@@ -3668,20 +3673,27 @@
                 flex: 1;
                 min-height: 0;
                 overflow-y: auto;
+                padding: 8px;
+                background:
+                    linear-gradient(
+                        180deg,
+                        rgba(12,21,33,.96),
+                        rgba(7,12,19,.98)
+                    );
                 scrollbar-width: thin;
                 scrollbar-color:
-                    #ca3035 #111722;
+                    #5a7fb3 #08101a;
             }
 
             #${CONFIG.panelId}
             .tabs {
                 display: grid;
-                grid-template-columns: 1fr 1fr;
-                padding: 5px;
-                gap: 4px;
-                background: #0d1117;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                padding: 8px;
+                gap: 6px;
+                background: rgba(15,22,34,.95);
                 border-bottom:
-                    1px solid #21262d;
+                    1px solid rgba(102,138,188,.12);
             }
 
             #${CONFIG.panelId}
@@ -3689,40 +3701,35 @@
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                gap: 5px;
-                padding: 6px 4px;
-                color: #7d899d;
-                background: transparent;
-                border: 1px solid transparent;
-                border-radius: 8px;
+                gap: 6px;
+                padding: 8px 6px;
+                color: #aab6d1;
+                background: rgba(20,30,44,.85);
+                border: 1px solid rgba(131,165,207,.12);
+                border-radius: 10px;
                 cursor: pointer;
                 font-size: 10px;
-                font-weight: bold;
+                font-weight: 700;
                 text-transform: uppercase;
                 transition:
                     color .15s ease,
                     background .15s ease,
+                    border-color .15s ease,
                     transform .15s ease;
             }
 
             #${CONFIG.panelId}
             .tab-button:hover {
-                color: #dfe8f5;
-                background: #151e2d;
+                color: #eef4ff;
+                background: rgba(30,44,66,.95);
             }
 
             #${CONFIG.panelId}
             .tab-button.active {
                 color: #fff;
-                background:
-                    linear-gradient(
-                        180deg,
-                        #d83a3f,
-                        #9f2228
-                    );
-                border-color: #f06468;
-                box-shadow:
-                    0 4px 10px rgba(159,34,40,.25);
+                background: linear-gradient(180deg, #2a6099, #175087);
+                border-color: #3f7fc2;
+                box-shadow: inset 0 0 0 1px rgba(255,255,255,.12), 0 8px 18px rgba(19,46,75,.22);
             }
 
             #${CONFIG.panelId}
@@ -4014,29 +4021,29 @@
             #${CONFIG.panelId}
             .actions button {
                 flex: 1;
-                padding: 7px;
-                color: #fff;
-                background:
-                    linear-gradient(
-                        #d83a3f,
-                        #9f2228
-                    );
-                border: 1px solid #f06468;
-                border-radius: 8px;
+                padding: 8px 10px;
+                color: #e9f2ff;
+                background: rgba(34,55,82,.95);
+                border: 1px solid rgba(106,155,212,.18);
+                border-radius: 10px;
                 cursor: pointer;
                 font-size: 10px;
-                font-weight: bold;
+                font-weight: 700;
+                text-transform: uppercase;
+                transition: background .15s ease, border-color .15s ease;
+            }
+
+            #${CONFIG.panelId}
+            .actions button:hover {
+                background: rgba(49,81,131,.95);
+                border-color: rgba(123,179,255,.3);
             }
 
             #${CONFIG.panelId}
             .actions button:last-child {
-                color: #171717;
-                background:
-                    linear-gradient(
-                        #f4d65e,
-                        #cba52a
-                    );
-                border-color: #ffe984;
+                color: #f4f4f4;
+                background: rgba(112,105,29,.95);
+                border-color: rgba(197,181,70,.27);
             }
 
             #${CONFIG.panelId}
