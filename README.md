@@ -1,8 +1,8 @@
 <div align="center">
 
-<img src="tray.png" width="72" alt="PokeGrid">
+<img src="tray.png" width="72" alt="PokeIdle">
 
-# PokeGrid
+# PokeIdle
 
 **Quatro contas de Poke Idle World em uma janela só.**
 
@@ -40,11 +40,11 @@ Baixe a versão LTS em [nodejs.org](https://nodejs.org) e instale (é next, next
 Clique no botão verde **Code** aqui em cima e depois em **Download ZIP**. Extraia a pasta onde quiser. Quem usa Git pode clonar:
 
 ```bash
-git clone https://github.com/soufoka/PokeGrid-source.git
+git clone https://github.com/fellipeluisdev/PokeIdle.git
 ```
 
 **3. Abra o app**
-No Windows, dê dois cliques no arquivo **Abrir PokeGrid** (`.vbs`) dentro da pasta. Na primeira vez ele instala o necessário e abre sozinho; nas próximas abre na hora, sem janela preta. Quer um atalho? Botão direito nele, **Enviar para: Área de trabalho (criar atalho)**.
+No Windows, dê dois cliques no arquivo **Abrir PokeIdle** (`.vbs`) dentro da pasta. Na primeira vez ele instala o necessário e abre sozinho; nas próximas abre na hora, sem janela preta. Quer um atalho? Botão direito nele, **Enviar para: Área de trabalho (criar atalho)**.
 
 Também dá pra usar o **iniciar.bat**, mas ele mantém uma janela preta aberta e, se ela for fechada, o app fecha junto.
 

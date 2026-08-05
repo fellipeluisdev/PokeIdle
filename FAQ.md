@@ -1,15 +1,15 @@
-# PokeGrid: perguntas frequentes
+# PokeIdle: perguntas frequentes
 
 ## Instalação e atualização
 
 ### Atualizar apaga minhas configurações e scripts?
-Não. Tudo fica em `%APPDATA%\pokegrid`, fora do programa. Atualizar, reinstalar ou trocar de versão não mexe nessa pasta.
+Não. Tudo fica em `%APPDATA%\pokeidle`, fora do programa. Atualizar, reinstalar ou trocar de versão não mexe nessa pasta.
 
 ### Existe um config.ini?
-Não. Backup = copiar a pasta `%APPDATA%\pokegrid`. Só as senhas não migram pra outro PC (são criptografadas pelo Windows); o resto vai junto.
+Não. Backup = copiar a pasta `%APPDATA%\pokeidle`. Só as senhas não migram pra outro PC (são criptografadas pelo Windows); o resto vai junto.
 
 ### O processo abre mas a janela não aparece
-Bug das versões 1.5.5 a 1.5.9, corrigido na **1.5.10**. Baixe a mais recente: https://github.com/soufoka/PokeGrid-source
+Bug das versões 1.5.5 a 1.5.9, corrigido na **1.5.10**. Baixe a mais recente no repositório do projeto.
 
 ### Qual navegador o app usa?
 Electron (Chromium, o motor do Chrome). Cada conta roda numa sessão separada.
@@ -44,4 +44,4 @@ Pelo botão **Ajude o projeto** ao lado do logo, no topo do app, ou direto em ht
 
 
 ### Como contribuo?
-Fork de https://github.com/soufoka/PokeGrid-source, rode `npm test` e abra o PR. A `main` é protegida, tudo entra por PR.
+Fork de https://github.com/fellipeluisdev/PokeIdle, rode `npm test` e abra o PR. A `main` é protegida, tudo entra por PR.
