@@ -234,6 +234,21 @@
   #stats .it { display: flex; justify-content: space-between; gap: 10px; padding: 1px 15px 1px 31px; font-size: 11.5px; color: #8b949e; }
   #stats .it span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   #stats .it .q { color: #adbac7; font-variant-numeric: tabular-nums; flex: none; }
+  #stats .bag-panel { display: flex; flex-direction: column; gap: 8px; padding: 8px 12px 6px; background: #0d1117; border: 1px solid #161f2c; border-radius: 12px; }
+  #stats .bag-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+  #stats .bag-tab { flex: 1 1 0; min-width: 72px; padding: 7px 10px; color: #c3d1e0; background: #0c141f; border: 1px solid #19273b; border-radius: 999px; font-size: 11px; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: background .15s ease, color .15s ease, border-color .15s ease; }
+  #stats .bag-tab.active { color: #fff; background: linear-gradient(180deg, #204a86, #0c2c53); border-color: #4174b3; }
+  #stats .bag-tab:hover { background: #12203a; }
+  #stats .bag-tab-content { display: none; }
+  #stats .bag-tab-content.active { display: block; }
+  #stats .bag-items-section { display: grid; gap: 6px; }
+  #stats .bag-panel .empty { padding: 16px 12px; color: #7d8aa2; background: #09101a; border: 1px solid #10203a; border-radius: 10px; text-align: center; }
+  #stats .bag-pokemon-grid { display: grid; gap: 8px; }
+  #stats .bag-poke-item { display: flex; justify-content: space-between; align-items: center; gap: 10px; padding: 10px 12px; background: #09101a; border: 1px solid #14213a; border-radius: 10px; }
+  #stats .bag-poke-main { display: flex; flex-direction: column; gap: 4px; min-width: 0; }
+  #stats .bag-poke-name { color: #f3f8ff; font-weight: 700; font-size: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  #stats .bag-poke-meta { color: #8fa3be; font-size: 10px; }
+  #stats .bag-poke-tag { color: #a5badd; font-size: 10px; background: rgba(69, 102, 155, 0.16); border: 1px solid rgba(68, 97, 143, 0.25); border-radius: 999px; padding: 4px 8px; flex-shrink: 0; }
   #stats .baggrid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: #171d25; margin-top: 2px; }
   #stats .bg { display: flex; align-items: center; gap: 7px; padding: 7px 13px; background: #0d1117; font-size: 12px; }
   #stats .bg .bcd { width: 7px; height: 7px; border-radius: 50%; flex: none; box-shadow: 0 0 5px currentColor; }
@@ -2026,6 +2041,7 @@ return {live,hasBalls,hasInv,balls,potions,revives,prevHunt:resumo(P.prev),shiny
     c.hide = c.hide || {};
     c.bagHide = c.bagHide || {};
     c.itemHide = c.itemHide || {};
+    c.bagTab = String(c.bagTab || 'all');
         // vem de arquivo de config importado: so entra com forma conferida (o nome vai pra tela)
     c.pinned = (Array.isArray(c.pinned) ? c.pinned : []).slice(0, 40)
       .filter(p => p && typeof p === 'object' && (p.t === 'ball' || p.t === 'item'))
@@ -2036,6 +2052,7 @@ return {live,hasBalls,hasInv,balls,potions,revives,prevHunt:resumo(P.prev),shiny
   }
   let cfg = loadStatsCfg();
   let lastData = null; // ultimo d valido (pra listar itens da bag na config)
+  let bagTab = cfg.bagTab || 'all';
   const saveStatsCfg = () => { try { lsSet('statsCfg', JSON.stringify(cfg)); } catch {} };
   // Shinies encontrados na vida da conta (acumulado pelo PokeIdle, por id de personagem)
   const loadShinyLife = () => { try { return lsObj('shinyLife'); } catch { return {}; } };
@@ -2091,32 +2108,37 @@ return {live,hasBalls,hasInv,balls,potions,revives,prevHunt:resumo(P.prev),shiny
       if (!d.bag || !d.bag.length) return '';
       const byLabel = {}; d.bag.forEach(g => byLabel[g.label] = g);
       const order = cfg.bagOrder.filter(l => byLabel[l]); d.bag.forEach(g => { if (!order.includes(g.label)) order.push(g.label); });
-      // filtra categorias escondidas e itens escondidos, recalcula o total
       const vis = order.filter(l => !cfg.bagHide[l]).map(l => { const g = byLabel[l]; const items = (g.items || []).filter(it => !cfg.itemHide[it.id]); return { label: l, items, total: items.reduce((s, x) => s + x.qty, 0) }; }).filter(g => g.items.length);
       if (!vis.length) return '';
-      let s = sec('#2bb0a8', 'Bag') + '<div class="baggrid">';
-      vis.forEach(g => { const cc = BAGCOR[g.label] || '#7d8590'; s += '<div class="bg"><span class="bcd" style="background:' + cc + ';color:' + cc + ';"></span><span class="bn">' + g.label + '</span><span class="bt">' + nf(g.total) + '</span></div>'; });
-      s += '</div>';
-      const showAll = cfg.bagItems, impMode = !showAll && cfg.bagImportantOnly;
-      if (showAll || impMode) {
-        let imp = null;
-        if (impMode) {
-          const inv = d.invMap || {};
-          imp = new Set(['b4', 'i59195', 'i44417']); // Ultra Ball, Rare Pokémon Picture, Strange Pheromone
-          for (const pid of [204, 203, 202, 201, 200]) if (inv[pid]) { imp.add('i' + pid); break; } // potion mais forte que tiver
-          for (const rid of [206, 205]) if (inv[rid]) { imp.add('i' + rid); break; } // revive mais forte que tiver
-        }
-        s += '<div class="pb">';
-        vis.forEach(g => {
-          const items = imp ? g.items.filter(it => imp.has(it.id)) : g.items;
-          if (!items.length) return;
+      const utilLabels = new Set(['Pokébolas', 'Heal', 'Revive']);
+      const utilCats = vis.filter(g => utilLabels.has(g.label));
+      const itemCats = vis.filter(g => !utilLabels.has(g.label));
+      const renderSections = (sections, mode) => {
+        if (!sections.length) return '<div class="empty">Nenhum item nesta aba.</div>';
+        return sections.map(g => {
           const cc = BAGCOR[g.label] || '#7d8590';
-          s += '<div class="cat"><span class="cd" style="background:' + cc + ';color:' + cc + '"></span><span class="cn">' + g.label + '</span></div>';
-          items.slice(0, 8).forEach(it => s += '<div class="it"><span>' + esc(it.name) + '</span><span class="q">' + nf(it.qty) + '</span></div>');
-        });
-        s += '</div>';
-      }
-      return s;
+          const label = (mode === 'util' && g.label === 'Pokébolas') ? 'Utilitários' : g.label;
+          const items = g.items.map(it => '<div class="it"><span>' + esc(it.name) + '</span><span class="q">' + nf(it.qty) + '</span></div>').join('');
+          return '<div class="cat"><span class="cd" style="background:' + cc + ';color:' + cc + '"></span><span class="cn">' + label + '</span></div>' + items;
+        }).join('');
+      };
+      const renderPokemonTab = () => {
+        const team = d.team || [];
+        if (!team.length) return '<div class="empty">Nenhum Pokémon disponível.</div>';
+        return '<div class="bag-pokemon-grid">' + team.map(p => {
+          const shine = p.shiny ? ' ✨' : '';
+          const lead = p.ld ? '⭐ ' : '';
+          const hp = p.hp != null ? 'HP ' + nf(p.hp) : '';
+          return '<div class="bag-poke-item"><div class="bag-poke-main"><span class="bag-poke-name">' + esc(lead + p.name + shine) + '</span><span class="bag-poke-meta">' + nf(p.level || 0) + ' / ' + hp + '</span></div><span class="bag-poke-tag">' + (p.ld ? 'Líder' : 'Equipe') + '</span></div>';
+        }).join('') + '</div>';
+      };
+      const summaryFor = (sections, mode) => '<div class="baggrid">' + sections.map(g => { const cc = BAGCOR[g.label] || '#7d8590'; const label = (mode === 'util' && g.label === 'Pokébolas') ? 'Utilitários' : g.label; return '<div class="bg"><span class="bcd" style="background:' + cc + ';color:' + cc + ';"></span><span class="bn">' + label + '</span><span class="bt">' + nf(g.total) + '</span></div>'; }).join('') + '</div>';
+      const activeTab = bagTab || 'all';
+      const allTab = '<div class="bag-tab-content bag-tab-all' + (activeTab === 'all' ? ' active' : '') + '" data-bagtab="all">' + summaryFor(vis) + '<div class="bag-items-section">' + renderSections(vis) + '</div></div>';
+      const utilTab = '<div class="bag-tab-content bag-tab-util' + (activeTab === 'util' ? ' active' : '') + '" data-bagtab="util">' + summaryFor(utilCats, 'util') + '<div class="bag-items-section">' + renderSections(utilCats, 'util') + '</div></div>';
+      const pokemonTab = '<div class="bag-tab-content bag-tab-pokemon' + (activeTab === 'pokemon' ? ' active' : '') + '" data-bagtab="pokemon">' + renderPokemonTab() + '</div>';
+      const itensTab = '<div class="bag-tab-content bag-tab-itens' + (activeTab === 'itens' ? ' active' : '') + '" data-bagtab="itens">' + summaryFor(itemCats) + '<div class="bag-items-section">' + renderSections(itemCats) + '</div></div>';
+      return sec('#2bb0a8', 'Bag') + '<div class="bag-panel"><div class="bag-tabs"><button class="bag-tab' + (activeTab === 'all' ? ' active' : '') + '" data-bagtab="all" type="button">Tudo</button><button class="bag-tab' + (activeTab === 'util' ? ' active' : '') + '" data-bagtab="util" type="button">Utilitários</button><button class="bag-tab' + (activeTab === 'pokemon' ? ' active' : '') + '" data-bagtab="pokemon" type="button">Pokémon</button><button class="bag-tab' + (activeTab === 'itens' ? ' active' : '') + '" data-bagtab="itens" type="button">Itens</button></div>' + allTab + utilTab + pokemonTab + itensTab + '</div>';
     },
     pinned: (d) => {
       if (!cfg.pinned.length) return '';
@@ -2287,7 +2309,21 @@ return {live,hasBalls,hasInv,balls,potions,revives,prevHunt:resumo(P.prev),shiny
     // o servidor confirma pelo estado (pokes); o refresh mostra a estrela nova
     setTimeout(() => { row.style.opacity = ''; refreshStats(); }, 800);
   }
-  stBody.addEventListener('click', (e) => { const row = e.target.closest('.tm-row'); if (row) trocaLider(row); });
+  stBody.addEventListener('click', (e) => {
+    const tab = e.target.closest('.bag-tab');
+    if (tab) {
+      bagTab = tab.dataset.bagtab || 'all';
+      cfg.bagTab = bagTab;
+      saveStatsCfg();
+      const panel = tab.closest('.bag-panel');
+      if (panel) {
+        panel.querySelectorAll('.bag-tab').forEach(btn => btn.classList.toggle('active', btn === tab));
+        panel.querySelectorAll('.bag-tab-content').forEach(section => section.classList.toggle('active', section.dataset.bagtab === bagTab));
+      }
+      return;
+    }
+    const row = e.target.closest('.tm-row'); if (row) trocaLider(row);
+  });
   setInterval(refreshStats, 2000);
 
   function applyStats() {
