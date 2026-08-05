@@ -234,30 +234,28 @@
   #stats .it { display: flex; justify-content: space-between; gap: 10px; padding: 1px 15px 1px 31px; font-size: 11.5px; color: #8b949e; }
   #stats .it span:first-child { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
   #stats .it .q { color: #adbac7; font-variant-numeric: tabular-nums; flex: none; }
-  #stats .bag-panel { display: flex; flex-direction: column; gap: 10px; padding: 10px; background: #07101a; border: 1px solid #18304b; border-radius: 16px; }
-  #stats .bag-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
-  #stats .bag-tab { flex: 1 1 0; min-width: 70px; padding: 8px 10px; color: #9fb6c9; background: #071822; border: 1px solid #1a324f; border-radius: 999px; font-size: 11px; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: background .15s ease, color .15s ease, border-color .15s ease; }
-  #stats .bag-tab.active { color: #fff; background: linear-gradient(180deg, #2b5ea7, #132a4d); border-color: #4174b3; box-shadow: inset 0 0 0 1px rgba(255,255,255,.08); }
-  #stats .bag-tab:hover { background: #102a47; }
+  #stats .bag-panel { display: flex; flex-direction: column; gap: 10px; padding: 12px; background: linear-gradient(180deg, rgba(8,18,30,.98), rgba(5,10,17,.98)); border: 1px solid rgba(214, 180, 107, .18); border-radius: 18px; box-shadow: inset 0 0 0 1px rgba(255,255,255,.03), 0 0 0 1px rgba(255,255,255,.02); }
+  #stats .bag-tabs { display: flex; gap: 6px; flex-wrap: wrap; margin-bottom: 4px; }
+  #stats .bag-tab { flex: 1 1 0; min-width: 72px; padding: 8px 10px; color: #c1d0e1; background: rgba(11, 22, 37, .85); border: 1px solid rgba(122, 145, 172, .18); border-radius: 999px; font-size: 11px; font-weight: 700; text-transform: uppercase; cursor: pointer; transition: background .15s ease, color .15s ease, border-color .15s ease; display: inline-flex; align-items: center; gap: 6px; justify-content: center; }
+  #stats .bag-tab-icon { display: inline-flex; width: 16px; height: 16px; align-items: center; justify-content: center; font-size: 12px; }
+  #stats .bag-tab.active { color: #fff; background: linear-gradient(180deg, #d46ed8, #8f4da1); border-color: rgba(190, 123, 222, .45); box-shadow: inset 0 0 0 1px rgba(255,255,255,.08); }
+  #stats .bag-tab:hover { background: rgba(18, 35, 60, .95); }
   #stats .bag-tab-content { display: none; }
   #stats .bag-tab-content.active { display: block; }
-  #stats .bag-item-section { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
-  #stats .bag-item-section-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 8px 12px; background: #081725; border: 1px solid #122b40; border-radius: 14px; color: #8fa3be; font-size: 11px; text-transform: uppercase; }
-  #stats .bag-item-count { color: #c9d1d9; font-weight: 700; }
-  #stats .bag-item-section { display: flex; flex-direction: column; gap: 8px; margin-top: 10px; }
-  #stats .bag-item-section-head { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 10px 12px; background: #081725; border: 1px solid #122b40; border-radius: 14px; color: #8fa3be; font-size: 11px; text-transform: uppercase; letter-spacing: .04em; }
-  #stats .bag-item-count { color: #c9d1d9; font-weight: 700; }
   #stats .bag-item-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 8px; }
-  #stats .bag-item-card { position: relative; min-height: 96px; padding: 12px 10px 12px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; background: #07101a; border: 1px solid #14253a; border-radius: 16px; overflow: hidden; box-shadow: inset 0 0 0 1px rgba(255,255,255,.03); }
-  #stats .bag-item-icon { width: 46px; height: 46px; display: flex; align-items: center; justify-content: center; background: rgba(14, 26, 38, .95); border: 1px solid #152a3f; border-radius: 12px; }
+  #stats .bag-item-card { position: relative; min-height: 84px; padding: 10px; display: flex; align-items: center; justify-content: center; background: #09121c; border: 1px solid rgba(255,255,255,.06); border-radius: 14px; overflow: hidden; box-shadow: inset 0 0 0 1px rgba(255,255,255,.02); transition: transform .12s ease, border-color .15s ease, background .15s ease; }
+  #stats .bag-item-card:hover { transform: translateY(-1px); background: linear-gradient(180deg, rgba(9,18,28,.98), rgba(7,12,19,.98)); border-color: rgba(135, 168, 210, .2); }
+  #stats .bag-item-empty { opacity: .35; background: rgba(11,19,32,.75); border-color: rgba(115,147,181,.08); }
+  #stats .bag-item-icon { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; background: rgba(11, 20, 33, .95); border: 1px solid rgba(115, 147, 181, .18); border-radius: 14px; }
   #stats .bag-item-icon img { max-width: 100%; max-height: 100%; }
   #stats .bag-item-icon span { font-size: 14px; font-weight: 700; color: #7d8aa2; }
-  #stats .bag-item-name { font-size: 10.5px; color: #c9d1d9; text-align: center; line-height: 1.2; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%; }
-  #stats .bag-item-qty { position: absolute; top: 8px; right: 8px; min-width: 24px; padding: 2px 6px; font-size: 10px; font-weight: 700; color: #fff; background: rgba(9, 15, 25, .95); border-radius: 999px; text-align: right; }
-  #stats .bag-empty { padding: 16px 12px; color: #7d8aa2; background: #09101a; border: 1px solid #10203a; border-radius: 10px; text-align: center; }
+  #stats .bag-item-qty { position: absolute; top: 8px; right: 8px; min-width: 24px; padding: 3px 7px; font-size: 10px; font-weight: 700; color: #fff; background: rgba(9, 12, 17, .95); border: 1px solid rgba(255,255,255,.08); border-radius: 999px; text-align: right; box-shadow: 0 1px 2px rgba(0,0,0,.25); }
+  #stats .bag-empty { padding: 16px 12px; color: #9aa8b8; background: rgba(8, 16, 26, .95); border: 1px solid rgba(46, 71, 96, .3); border-radius: 12px; text-align: center; }
   #stats .bag-pokemon-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; margin-top: 6px; }
-  #stats .bag-poke-card { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 12px 10px; background: #08131f; border: 1px solid #152a3f; border-radius: 14px; }
+  #stats .bag-poke-card { display: flex; flex-direction: column; align-items: center; gap: 6px; padding: 12px 10px; background: #08131f; border: 1px solid rgba(255,255,255,.06); border-radius: 14px; }
   #stats .bag-poke-name { color: #f8fbff; font-size: 12px; font-weight: 700; text-align: center; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; width: 100%; }
+  #stats .bag-poke-meta { color: #9aa8b8; font-size: 11px; text-align: center; line-height: 1.3; }
+
   #stats .bag-poke-meta { color: #8fa3be; font-size: 11px; text-align: center; line-height: 1.3; }
   #stats .bag-poke-card::before { content: ''; width: 40px; height: 40px; border-radius: 100%; background: rgba(19, 32, 50, .85); }
   #stats .bg .bcd { width: 7px; height: 7px; border-radius: 50%; flex: none; box-shadow: 0 0 5px currentColor; }
@@ -889,6 +887,7 @@ S.supBase=cur;if(S.picBase==null){S.picBase=now;}else{if(now>S.picBase){const do
 
       panel.querySelector('.reload').onclick = () => { if (!off[i]) wv.reload(); };
       panel.querySelector('.expand').onclick = () => toggleExpand(i);
+      nameEl.onclick = () => toggleExpand(i);
       nameEl.ondblclick = () => {
         const novo = prompt(t('promptRename'), accounts[i].name || defName(i));
         if (novo != null) { accounts[i].name = novo; nameEl.textContent = novo || defName(i); save(); }
@@ -2133,32 +2132,26 @@ return {live,hasBalls,hasInv,balls,potions,revives,prevHunt:resumo(P.prev),shiny
         if (!onlyImportant) return true;
         return importantName(itemInfo(it).n || it.name || it.id);
       };
-      const utilLabels = new Set(['Pokébolas', 'Heal', 'Revive']);
-      const utilItems = vis.filter(g => utilLabels.has(g.label)).flatMap(g => g.items).filter(keepItem);
-      const itemItems = vis.filter(g => !utilLabels.has(g.label)).flatMap(g => g.items).filter(keepItem);
+      const ballLabels = new Set(['Pokébolas']);
       const allItems = vis.flatMap(g => g.items).filter(keepItem);
+      const ballItems = vis.filter(g => ballLabels.has(g.label)).flatMap(g => g.items).filter(keepItem);
+      const itemItems = vis.filter(g => !ballLabels.has(g.label)).flatMap(g => g.items).filter(keepItem);
       const renderCard = (it) => {
         const info = itemInfo(it);
         const icon = icSrc(info.ic || it.ic || '');
         const title = esc(info.n || it.name || '#' + it.id);
+        const quantity = it.qty >= 10000 ? '9999+' : nf(it.qty);
         return '<div class="bag-item-card" title="' + title + '"><div class="bag-item-icon">'
           + (icon ? '<img src="' + icon + '" alt="' + title + '" onerror="this.remove()">' : '<span>' + title.slice(0, 2).toUpperCase() + '</span>')
-          + '</div><div class="bag-item-name">' + title + '</div><div class="bag-item-qty">' + nf(it.qty) + '</div></div>';
+          + '</div><div class="bag-item-qty">' + quantity + '</div></div>';
       };
-      const renderGroup = (items) => {
-        const grouped = items.reduce((acc, it) => {
-          const key = String(it.cat || 'Outros');
-          if (!acc[key]) acc[key] = [];
-          acc[key].push(it);
-          return acc;
-        }, {});
-        const order = [...BAGCATS.filter(cat => grouped[cat]), ...Object.keys(grouped).filter(cat => !BAGCATS.includes(cat))];
-        return order.map(cat => {
-          const label = cat === 'Pokébolas' ? 'Utilitários' : cat;
-          return '<div class="bag-item-section"><div class="bag-item-section-head"><span>' + esc(label) + '</span><span class="bag-item-count">' + grouped[cat].length + ' itens</span></div><div class="bag-item-grid">' + grouped[cat].map(renderCard).join('') + '</div></div>';
-        }).join('');
+      const renderBlankCard = () => '<div class="bag-item-card bag-item-empty"></div>';
+      const renderItems = (items) => {
+        const slots = 24;
+        const cards = items.map(renderCard);
+        while (cards.length < slots) cards.push(renderBlankCard());
+        return '<div class="bag-item-grid">' + cards.join('') + '</div>';
       };
-      const renderItems = (items) => items.length ? renderGroup(items) : '<div class="bag-empty">Nenhum item nesta aba.</div>';
       const renderPokemonTab = () => {
         const team = d.team || [];
         if (!team.length) return '<div class="bag-empty">Nenhum Pokémon disponível.</div>';
@@ -2170,10 +2163,16 @@ return {live,hasBalls,hasInv,balls,potions,revives,prevHunt:resumo(P.prev),shiny
       };
       const activeTab = bagTab || 'all';
       const allTab = '<div class="bag-tab-content bag-tab-all' + (activeTab === 'all' ? ' active' : '') + '" data-bagtab="all">' + renderItems(allItems) + '</div>';
-      const utilTab = '<div class="bag-tab-content bag-tab-util' + (activeTab === 'util' ? ' active' : '') + '" data-bagtab="util">' + renderItems(utilItems) + '</div>';
+      const ballsTab = '<div class="bag-tab-content bag-tab-balls' + (activeTab === 'balls' ? ' active' : '') + '" data-bagtab="balls">' + renderItems(ballItems) + '</div>';
       const pokemonTab = '<div class="bag-tab-content bag-tab-pokemon' + (activeTab === 'pokemon' ? ' active' : '') + '" data-bagtab="pokemon">' + renderPokemonTab() + '</div>';
       const itensTab = '<div class="bag-tab-content bag-tab-itens' + (activeTab === 'itens' ? ' active' : '') + '" data-bagtab="itens">' + renderItems(itemItems) + '</div>';
-      return sec('#2bb0a8', 'Bag') + '<div class="bag-panel"><div class="bag-tabs"><button class="bag-tab' + (activeTab === 'all' ? ' active' : '') + '" data-bagtab="all" type="button">Tudo</button><button class="bag-tab' + (activeTab === 'util' ? ' active' : '') + '" data-bagtab="util" type="button">Utilitários</button><button class="bag-tab' + (activeTab === 'pokemon' ? ' active' : '') + '" data-bagtab="pokemon" type="button">Pokémon</button><button class="bag-tab' + (activeTab === 'itens' ? ' active' : '') + '" data-bagtab="itens" type="button">Itens</button></div>' + allTab + utilTab + pokemonTab + itensTab + '</div>';
+      return sec('#2bb0a8', 'Inventário') + '<div class="bag-panel"><div class="bag-tabs">'
+        + '<button class="bag-tab' + (activeTab === 'all' ? ' active' : '') + '" data-bagtab="all" type="button"><span class="bag-tab-icon">📦</span>Tudo</button>'
+        + '<button class="bag-tab' + (activeTab === 'pokemon' ? ' active' : '') + '" data-bagtab="pokemon" type="button"><span class="bag-tab-icon">🐾</span>Pokémon</button>'
+        + '<button class="bag-tab' + (activeTab === 'balls' ? ' active' : '') + '" data-bagtab="balls" type="button"><span class="bag-tab-icon">⚪</span>Pokébolas</button>'
+        + '<button class="bag-tab' + (activeTab === 'itens' ? ' active' : '') + '" data-bagtab="itens" type="button"><span class="bag-tab-icon">🧪</span>Itens</button>'
+        + '</div>' + allTab + pokemonTab + ballsTab + itensTab + '</div>';
+
     },
     pinned: (d) => {
       if (!cfg.pinned.length) return '';
